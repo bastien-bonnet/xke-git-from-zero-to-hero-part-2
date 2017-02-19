@@ -81,15 +81,15 @@ Plusieurs façons d’identifier un commit dans une commande git :
 Utilisez git checkout avec chacune des 3 façons
 
 === rebase -i
-positionner HEAD sur master (checkout master)
-modifier un fichier A et commiter (c1)
-modifier un fichier B et commiter avec un mauvais message (c2)
-modifier le fichier A et commiter (c3)
-modifier les fichiers C et D et commiter (c4)
-rebase -i HEAD~4
-deplacer c3 après c1 et fixup de c3 => modifier l’ordre et fusionner les commit
-reword c2
-edit c4 : séparer les modifs des fichiers C et D en 2 commits
+* positionner HEAD sur master (checkout master)
+* modifier un fichier A et commiter (c1)
+* modifier un fichier B et commiter avec un mauvais message (c2)
+* modifier le fichier A et commiter (c3)
+* modifier les fichiers C et D et commiter (c4)
+* `rebase -i HEAD~4`
+* deplacer c3 après c1 et fixup de c3 => modifier l’ordre et fusionner les commit
+* reword c2
+* edit c4 : séparer les modifs des fichiers C et D en 2 commits
 
 === rebase --onto
 TODO
