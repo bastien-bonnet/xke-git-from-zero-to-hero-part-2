@@ -3,8 +3,24 @@
 :toc:
 :numbered: 1
 
+TODO
+Avant le XKE, envoyer les pré-requis ET le descriptif de l'atelier par email.
+
 == Pré-requis :
-les alias git : git lola
+
+Récupérer le projet en local
+
+ git clone https://github.com/bastien-bonnet/xke-git-from-zero-to-hero-part-2.git
+
+Se place dans le répertoire du projet cloné :
+
+ cd xke-git-from-zero-to-hero-part-2
+
+Visualier l'historique sous forme de graphe compact :
+
+----
+git config alias.l 'log --graph --oneline --color --decorate --all'
+----
 
 == Introduction : 
 programme du slot : 
