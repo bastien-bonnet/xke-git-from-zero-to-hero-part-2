@@ -10,19 +10,18 @@ Avant le XKE, envoyer les pré-requis ET le descriptif de l'atelier par email.
 
 Récupérer le projet en local
 
- git clone https://github.com/bastien-bonnet/xke-git-from-zero-to-hero-part-2.git
+	git clone https://github.com/bastien-bonnet/xke-git-from-zero-to-hero-part-2.git
 
 Se place dans le répertoire du projet cloné :
 
- cd xke-git-from-zero-to-hero-part-2
+	cd xke-git-from-zero-to-hero-part-2
 
-Visualier l'historique sous forme de graphe compact :
+Visualiser l'historique sous forme de graphe compact :
 
-----
-git config alias.l 'log --graph --oneline --color --decorate --all'
-----
+	git config alias.l 'log --graph --oneline --color --decorate --all'
 
-== Introduction : 
+
+== Introduction
 programme du slot : 
 merge et rebase
 manipulation et “deplacement” de commit
