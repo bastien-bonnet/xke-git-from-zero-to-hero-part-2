@@ -23,6 +23,7 @@ Visualiser l'historique sous forme de graphe compact :
 
 == Introduction
 Programme du slot :
+
 * merge et rebase
 * manipulation et “deplacement” de commit
 * cas pratiques rencontrés en projets
