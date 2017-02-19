@@ -129,15 +129,26 @@ git revert C0  => on crée un nouveau commit après C1 qui inverse les modifs de
 TODO
 
 
-== Mise en situation
+== Mises en situation
+
+=== Situation 1
 rebase d’une branche sur une autre pour valider l’intégration de 2 features sans faire de merge.
-je dev un commit sur la master: 
-git checkout -b pour rajouter une référence sur ce commit
-git checkout master 
-git reset HEAD~1
-on rétablit le master à sa version origin tout en maintenant le dev qui a été produit.
-je crée une branche B2 sur la branche  B1 au lieu de master:
-si on fait un rebase de B2 sur master, alors B1 est rebase sur master
-la solution est d’utiliser rebase --onto
+
+=== Situation 2
+je dev un commit sur la master:
+
+* git checkout -b pour rajouter une référence sur ce commit
+* git checkout master 
+* `git reset HEAD~1`
+
+On a rétabli le master à sa version origin tout en maintenant le dev qui a été produit.
+
+=== Situation 3
+je crée une branche B2 sur la branche  B1 au lieu de master :
+
+* si on fait un rebase de B2 sur master, alors B1 est rebase sur master
+* la solution est d’utiliser rebase --onto
+
+=== Situation 4
 utilisation de git reflog puis git reset --hard pour restaurer l’arborescence à un état antérieur.
 
