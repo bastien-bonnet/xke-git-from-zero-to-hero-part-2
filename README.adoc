@@ -22,15 +22,16 @@ Visualiser l'historique sous forme de graphe compact :
 
 
 == Introduction
-programme du slot : 
-merge et rebase
-manipulation et “deplacement” de commit
-cas pratiques rencontrés en projets
-faire le parallele avec java pour la notion de référencement d’objets et de garbage collector.
+Programme du slot :
+* merge et rebase
+* manipulation et “deplacement” de commit
+* cas pratiques rencontrés en projets
+
+TODO faire le parallele avec java pour la notion de référencement d’objets et de garbage collector.
 Un commit est immutable => on ne supprime jamais un commit mais on peut perdre sa visibilité par déréférencement (git reset ou git rebase).
 
 
-TODO : ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
+TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
 
 == Consignes
 
