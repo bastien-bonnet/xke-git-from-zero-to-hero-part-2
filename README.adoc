@@ -29,10 +29,10 @@ merge de la branche sur master
 git lola
 note merge résoud les conflit en prenant pour référence le dernier commit de chaque branche.
 
-== Résolution de conflit (reprise du précédent)
+=== Résolution de conflit (reprise du précédent)
 TODO
 
-== Rebase
+=== Rebase
 positionner HEAD sur master (checkout master)
 creer une branche git branch puis git checkout (ou git checkout -b)
 modifier un fichier puis commiter
@@ -45,13 +45,13 @@ note ++ : rebase ne déplace pas une branche, cette commande recrée de nouveaux
 Une fois les commits créées, la référence de la branche est déplacée sur les ces commits, ce qui donne l’illusion que la branche a été déplacée.
 Si on rajoute une autre référence de branche sur la branche “rebasée”, alors les commits restent référencés après le rebase et restent visibles.
 
-== plusieurs façons d’identifier un commit dans une commande git : 
+=== plusieurs façons d’identifier un commit dans une commande git : 
 nom de la branche associée
 clé SHA1
 HEAD~
 utilisez git checkout avec chacune des 3 façons
 
-== rebase -i
+=== rebase -i
 positionner HEAD sur master (checkout master)
 modifier un fichier A et commiter (c1)
 modifier un fichier B et commiter avec un mauvais message (c2)
@@ -62,10 +62,10 @@ deplacer c3 après c1 et fixup de c3 => modifier l’ordre et fusionner les comm
 reword c2
 edit c4 : séparer les modifs des fichiers C et D en 2 commits
 
-== rebase --onto
+=== rebase --onto
+TODO
 
-
-== Revenir en arrière : la différence entre checkout, reset et revert : 
+=== Revenir en arrière : la différence entre checkout, reset et revert : 
 explication de reset : 
 reset deplace une référence de branche sans modifier le contenu du fileSystem
 utilisation de base de reset :
