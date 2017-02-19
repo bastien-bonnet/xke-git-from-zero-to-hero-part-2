@@ -37,14 +37,18 @@ TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du
 == Consignes
 
 === Merge (reprise du précédent)
-positionner HEAD sur master (checkout master)
-creer une branche git branch puis git checkout (ou git checkout -b)
-modifier un fichier puis commiter
-checkout master
-modifier un autre fichier puis commiter
-merge de la branche sur master
-git lola
-note merge résoud les conflit en prenant pour référence le dernier commit de chaque branche.
+* positionner HEAD sur master (checkout master)
+* creer une branche git branch puis git checkout (ou git checkout -b)
+* modifier un fichier puis commiter
+* checkout master
+* modifier un autre fichier puis commiter
+* merge de la branche sur master
+* git lola
+
+[NOTE]
+====
+merge résout les conflit en prenant pour référence le dernier commit de chaque branche.
+====
 
 === Résolution de conflit (reprise du précédent)
 TODO
