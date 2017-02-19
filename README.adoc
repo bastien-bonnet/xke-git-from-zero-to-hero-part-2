@@ -71,11 +71,14 @@ Une fois les commits créées, la référence de la branche est déplacée sur l
 Si on rajoute une autre référence de branche sur la branche “rebasée”, alors les commits restent référencés après le rebase et restent visibles.
 ====
 
-=== plusieurs façons d’identifier un commit dans une commande git : 
-nom de la branche associée
-clé SHA1
-HEAD~
-utilisez git checkout avec chacune des 3 façons
+=== Identifier un commit
+Plusieurs façons d’identifier un commit dans une commande git :
+
+* nom de la branche associée
+* identifiant du commit (clé SHA1)
+* HEAD~
+
+Utilisez git checkout avec chacune des 3 façons
 
 === rebase -i
 positionner HEAD sur master (checkout master)
