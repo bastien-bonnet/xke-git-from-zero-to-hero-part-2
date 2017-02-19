@@ -12,7 +12,7 @@ Récupérer le projet en local
 
 	git clone https://github.com/bastien-bonnet/xke-git-from-zero-to-hero-part-2.git
 
-Se place dans le répertoire du projet cloné :
+Se placer dans le répertoire du projet cloné :
 
 	cd xke-git-from-zero-to-hero-part-2
 
