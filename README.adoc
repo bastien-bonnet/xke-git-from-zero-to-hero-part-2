@@ -54,17 +54,22 @@ merge résout les conflit en prenant pour référence le dernier commit de chaqu
 TODO
 
 === Rebase
-positionner HEAD sur master (checkout master)
-creer une branche git branch puis git checkout (ou git checkout -b)
-modifier un fichier puis commiter
-checkout master
-modifier un autre fichier puis commiter
-rebase de la branche sur master
-git lola
-note : rebase applique chaque commit de la branche un par un -> on résout les merges commit par commit.
-note ++ : rebase ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (pas nécessairement une branche ou un tag).
+* positionner HEAD sur master (checkout master)
+* creer une branche git branch puis git checkout (ou git checkout -b)
+* modifier un fichier puis commiter
+* checkout master
+* modifier un autre fichier puis commiter
+* rebase de la branche sur master
+* git lola
+
+[NOTE]
+====
+rebase applique chaque commit de la branche un par un -> on résout les merges commit par commit.
+
+++ : rebase ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (pas nécessairement une branche ou un tag).
 Une fois les commits créées, la référence de la branche est déplacée sur les ces commits, ce qui donne l’illusion que la branche a été déplacée.
 Si on rajoute une autre référence de branche sur la branche “rebasée”, alors les commits restent référencés après le rebase et restent visibles.
+====
 
 === plusieurs façons d’identifier un commit dans une commande git : 
 nom de la branche associée
