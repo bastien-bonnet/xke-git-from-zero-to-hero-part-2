@@ -8,15 +8,15 @@ Avant le XKE, envoyer les pré-requis ET le descriptif de l'atelier par email.
 
 == Pré-requis :
 
-Récupérer le projet en local
+* Récupérer le projet en local
 
 	git clone https://github.com/bastien-bonnet/xke-git-from-zero-to-hero-part-2.git
 
-Se placer dans le répertoire du projet cloné :
+* Se placer dans le répertoire du projet cloné :
 
 	cd xke-git-from-zero-to-hero-part-2
 
-Visualiser l'historique sous forme de graphe compact :
+* Pour visualiser l'historique des commits sous forme de graphe compact, nous rajoutons un nouvel alias) :
 
 	git config alias.l 'log --graph --oneline --color --decorate --all'
 
@@ -85,18 +85,33 @@ Il existe plusieurs façons d’identifier un commit dans une commande git :
 ** 3 commits antérieurs à HEAD sur le 2ème parent: `HEAD~3^2`
 ** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (oui! ça aussi, c'est possible!)
 
-Utilisez git checkout avec chacune des 3 façons
+Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes de identification de commit.
 
-=== rebase -i
-* positionner HEAD sur master (checkout master)
-* modifier un fichier A et commiter (c1)
-* modifier un fichier B et commiter avec un mauvais message (c2)
-* modifier le fichier A et commiter (c3)
-* modifier les fichiers C et D et commiter (c4)
-* `rebase -i HEAD~4`
-** deplacer c3 après c1 et fixup de c3 => modifier l’ordre et fusionner les commit
-** reword c2
-** edit c4 : séparer les modifs des fichiers C et D en 2 commits
+=== rebase --interactive ou rebase -i
+Cette commande vous permetra de réécrire l'histoire de votre code source.
+
+* positionner HEAD sur master : `git checkout master`
+* modifier un fichier A et commiter : `git add .` puis `git commit -m "c1"` 
+* modifier un fichier B et commiter avec un mauvais message : `git add .` puis `git commit -m "c2 with bad message"` 
+* modifier le fichier A et commiter : `git add .` puis `git commit -m "c3"` 
+* modifier les fichiers C et D et commiter : `git add .` puis `git commit -m "c4"` 
+* initier la réécriture de histoire des 4 derniers commits : `rebase -i HEAD~4`
+* un texte apparait à l'écran et est edité par vim. Les 4 premières lignes de ce text représente les 4 derniers commits que vous venez de faire. Ces commits sont identifiés par une clé SHA1 et une commande d'action par défaut `pick`. Ceci veut dire que dans l'état, l'historique de vos sources tiennent compte de ces 4 commits en l'état. A partir de là, il est possible d'effectuer les actions suivantes :
+** déplacer le commit c3 juste en dessous de c1 et déplaçant toute la ligne qui fait référence à c3. Cela aura pour effet de modifier l'ordre des commits dans l'historique.
+** fusionner c1 et c3 en conservant le message de commit de c1. Pour cela, il vous suffit de remplacer le mot clé `pick` par `f` ou `fixup` à la ligne correspondant au commit c3 après l'avoir déplacé en dessous de c1.
+** Pour corriger le message de commit de c2, il faut remplacer le mot clé `pick` par `r` ou `reword` devant ce commit 
+** Pour séparer c4 en 2 commits : remplacer le mot clé `pick` par `e` ou `edit` devant ce commit. Cela indique qu'au moment de réécrire l'historique, git interrompera sa réécriture pour vous rendre la main et vous permettre de modifier le commit c4.
+** une fois le texte modifié, sauvegarder le document en cours d'édition.
+* git va reconstruire une nouvelle branche en prenant les différents commits que vous avez listés dans le document et en leur appliquant les différentes opérations que vous avez déclarées (fixup, reword et edit).
+* une fois c1 et c3 fusionnés automatiquement fusionnés par git, celui-ci vous invite à ressaisir le texte de commit de c2
+* une fois le texte de c2 saisi et enregistré, git inclut le commit c4 à la nouvelle branche mais ne finalise pas la réécriture d'historique. Vous avez la main pour faire les actions suivantes :
+** `git l`: vous constatez qu'une nouvelle branche est en cours de création mais qu'elle ne porte pas encore de référence.
+** deplacer la référence de HEAD au commit précédent sans modifier le système de fichiers : `git reset HEAD~`
+** constater que les fichiers C et D sont modifiés par rapport au commit courant (c2 si vous avez bien suivi) : `git status`
+** créer un commit spécifique pour le fichier C : `git add C` puis `git commit -m "c4.1"` 
+** créer un commit spécifique pour le fichier D : `git add D` puis `git commit -m "c4.2"`
+** une fois les 2 commits créés, vous devez indiquer à git que la réécriture d'histoire est terminée : `git rebase --continue`
+* `git l` : la référence de la branche master a été déplacée sur le dernier commit de votre nouvelle branche.
 
 === rebase --onto
 TODO
@@ -104,16 +119,16 @@ TODO
 === Revenir en arrière : la différence entre checkout, reset et revert
 
 ==== Reset
-reset deplace une référence de branche sans modifier le contenu du fileSystem
+reset deplace une référence de branche sans modifier le contenu du système de fichier
 
 utilisation de base de reset :
 
-* git checkout master (on appelera par la suite ce commit C0)
-* modifier fichier A et commiter (c1)
-* `git reset HEAD~1` (C0 si vous avez bien suivi)
-* git status
+* `git checkout master` (on appelera par la suite ce commit r0)
+* modifier fichier A et commiter : `git add .` puis `git commit -m "r1"` 
+* `git reset HEAD~1` (r0 si vous avez bien suivi)
+* `git status
 +
-La référence de la branche master s’est déplacée d’un commit en arrière (C0) mais le file system reste dans l’état du commit C1. Du coup, git status considère l’état actuel du file system comme différent de son commit actuel.
+La référence de la branche master s’est déplacée d’un commit en arrière (c0) mais le file system reste dans l’état du commit C1. Du coup, git status considère l’état actuel du file system comme différent de son commit actuel.
 * git diff
 +
 vous voyez la différence entre le commit et l’état du fileSystem
