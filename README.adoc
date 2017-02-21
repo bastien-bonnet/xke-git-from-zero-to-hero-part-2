@@ -37,46 +37,53 @@ TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du
 == Consignes
 
 === Merge (reprise du précédent)
-* positionner HEAD sur master (checkout master)
-* creer une branche git branch puis git checkout (ou git checkout -b)
-* modifier un fichier puis commiter
-* checkout master
-* modifier un autre fichier puis commiter
-* merge de la branche sur master
-* git lola
+* positionner HEAD sur master : `git checkout master`
+* creer une branche `git branch ma-branche` puis `git checkout ma-branche` (par la suite, vous obtiendrez le même résultat avec la commande `git checkout -b ma-branche`)
+* modifier un fichier puis commiter : `git add .` puis `git commit -m "modif dans ma branche"`
+* retour sur la branche master : `git checkout master`
+* modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
+* merge de la branche sur master : `git merge ma-branche`
+* affichage de l'arbre des commits : `git l`
 
 [NOTE]
 ====
-merge résout les conflit en prenant pour référence le dernier commit de chaque branche.
+La commande merge résout les conflits en prenant pour référence le dernier commit (autrement dit, le dernier état du code source) de chaque branche.
 ====
 
 === Résolution de conflit (reprise du précédent)
 TODO
 
 === Rebase
-* positionner HEAD sur master (checkout master)
-* creer une branche git branch puis git checkout (ou git checkout -b)
-* modifier un fichier puis commiter
-* checkout master
-* modifier un autre fichier puis commiter
-* rebase de la branche sur master
-* git lola
+* positionner HEAD sur master : `git checkout master`
+* creer une branche puis se positionner dessus :  `git checkout -b mon-autre-branche`
+* modifier un fichier puis commiter : `git add .` puis `git commit -m "modif dans ma branche"`
+* retour sur la branche master : `git checkout master`
+* modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
+* rebase de la branche sur master : `git checkout mon-autre-branche` puis `git rebase master`
+* affichage de l'arbre des commits : `git l`
 
 [NOTE]
 ====
-rebase applique chaque commit de la branche un par un -> on résout les merges commit par commit.
+la commande rebase applique les modifications de chaque commit de la branche courante sur la cible. Ces modifications sont traitées commit par commit. Ce qui veut dire qu'on résout les merges et leurs conflits commit par commit au lieu de comparer l'état final d'une branche avec celle d'une autre (comme le ferait la commande merge).
 
-++ : rebase ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (pas nécessairement une branche ou un tag).
-Une fois les commits créées, la référence de la branche est déplacée sur les ces commits, ce qui donne l’illusion que la branche a été déplacée.
+La commande rebase ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (référencé par une branche, tag ou sa clé SHA1).
+
+Une fois les commits créées, la référence de la branche est déplacée sur ces commits, ce qui donne l’illusion que la branche a été déplacée.
 Si on rajoute une autre référence de branche sur la branche “rebasée”, alors les commits restent référencés après le rebase et restent visibles.
 ====
 
 === Identifier un commit
-Plusieurs façons d’identifier un commit dans une commande git :
+Il existe plusieurs façons d’identifier un commit dans une commande git :
 
-* nom de la branche associée
-* identifiant du commit (clé SHA1)
-* HEAD~
+* nom de la branche associée, par exemple `git checkout ma-branche` que vous connaissez déjà.
+* identifiant du commit. Il s'agit de la clé SHA1 du commit (visible avec certaines commandes comme  `git reflog`, `git log` ou notre alias `git l`)
+* Relativement à un autre commit en utilisant les operateurs ~ et ^: 
+** 1 commit antérieur au HEAD sur son 1er parent : `HEAD~` ou `HEAD^`
+** 2 commits antérieur à HEAD sur son 1er parent: `HEAD~~` ou `HEAD~2`
+** 42 commits antérieurs à HEAD sur son 1er parent: `HEAD~42`
+** 1 commit antérieur à HEAD sur le 2ème parent (et oui! En cas de merge, un commit peut avoir 2 parents ^^): `HEAD^2`
+** 3 commits antérieurs à HEAD sur le 2ème parent: `HEAD~3^2`
+** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (oui! ça aussi, c'est possible!)
 
 Utilisez git checkout avec chacune des 3 façons
 
