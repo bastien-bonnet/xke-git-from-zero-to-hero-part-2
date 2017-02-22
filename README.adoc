@@ -138,7 +138,7 @@ Cette commande crée un nouveau commit, modifiant le système de fichier, qui in
 ** Pour séparer c4 en 2 commits : remplacer le mot clé `pick` par `e` ou `edit` devant ce commit. Cela indique qu'au moment de réécrire l'historique, git interrompera sa réécriture pour vous rendre la main et vous permettre de modifier le commit c4.
 ** une fois le texte modifié, sauvegarder le document en cours d'édition.
 * git va reconstruire une nouvelle branche en prenant les différents commits que vous avez listés dans le document et en leur appliquant les différentes opérations que vous avez déclarées (fixup, reword et edit).
-* une fois c1 et c3 fusionnés automatiquement fusionnés par git, celui-ci vous invite à ressaisir le texte de commit de c2
+* une fois c1 et c3 automatiquement fusionnés par git, celui-ci vous invite à ressaisir le texte de commit de c2.
 * une fois le texte de c2 saisi et enregistré, git inclut le commit c4 à la nouvelle branche mais ne finalise pas la réécriture d'historique. Vous avez la main pour faire les actions suivantes :
 ** `git l`: vous constatez qu'une nouvelle branche est en cours de création mais qu'elle ne porte pas encore de référence.
 ** deplacer la référence de HEAD au commit précédent sans modifier le système de fichiers : `git reset HEAD~`
@@ -153,24 +153,39 @@ TODO
 
 == Mises en situation
 
-=== Situation 1
-rebase d’une branche sur une autre pour valider l’intégration de 2 features sans faire de merge.
+=== Situation 1 : valider l'intégration de 2 features sans mettre en péril ma branche master
+==== Description 
+J'ai 2 features A et B respectivement écrites dans les branches b-A et b-B en plus de la branche master (ce qui nous fait un total de 3 branches).
+Je souhaite valider que l'intégration de la feature A à la feature B fonctionne sans regression mais pour autant, aucune de ces feature ne doit être poussée sur la branche master avant que cette validation n'ait été faite.
 
-=== Situation 2
-je dev un commit sur la master:
+==== Solution
 
-* git checkout -b pour rajouter une référence sur ce commit
-* git checkout master 
-* `git reset HEAD~1`
+* Je crée une nouvelle référence de branche sur la feature A : `git checkout b-A` puis `git checkout -b b-A-2`
+* Je rebase b-A-2 sur b-B : `git rebase b-B`
+* Ainsi, mes référence de branche b-A et b-B ne sont pas alterée et j'ai désormais un branche b-A-2, fille de b-B qui intègre les développements des features A et B. je peux ainsi tester cette intégration en local.
+* si on veut aller plus loin et conduire des tests d'intégration sur cette nouvelle branche, il suffit de pousser cette branche sur le dépot distant de référence avec `git push origin b-A-2` et de faire en sorte que le système d'intégration continue builde le projet à partir de cette branche au lieu de master.
 
-On a rétabli le master à sa version origin tout en maintenant le dev qui a été produit.
+=== Situation 2 : J'ai rajouté un commit par erreur sur la branche master
 
-=== Situation 3
-je crée une branche B2 sur la branche  B1 au lieu de master :
+==== Description
+J'ai rajouté un commit sur la branche master au lieu d'en faire une nouvelle branche. En temps normal, développer une nouvelle feature implique de créer une nouvelle branche dédiée à cette feature.
+Je viens créer mon commit et mon HEAD pointe toujours sur la branche master.
 
-* si on fait un rebase de B2 sur master, alors B1 est rebase sur master
+==== Solution
+
+* Je rajoute la référence de ma branche b-A dédiée sur mon nouveau commit : `git branche b-A`
+* Je déplace la référence de la branche master au commit précédent et je restaure le système de fichiers à l'état précédent du master : `git reset HEAD~1 --hard`
+* Nous obtenons bien une branche master restaurée à son état précédent et une nouvelle branche b-A dédié à ma feature et fille du dernier commit du master. 
+
+
+
+=== Situation 3 :  créer une branche sur la mauvaise branche
+==== Description 
+je crée et développe une branche B2 sur la branche  B1 au lieu de la créer à partir de la branche master.
+De cette manière, si je tente la commande `git rebase master` à partir de la branche B2, je déclenche aussi un rebase de B1 sur la branche master (ce qui n'est pas souhaité).
+
+==== Solution
+
 * la solution est d’utiliser rebase --onto
 
-=== Situation 4
-utilisation de git reflog puis git reset --hard pour restaurer l’arborescence à un état antérieur.
 
