@@ -76,6 +76,8 @@ La commande rebase ne déplace pas une branche, cette commande recrée de nouvea
 
 Une fois les commits créées, la référence de la branche est déplacée sur ces commits, ce qui donne l’illusion que la branche a été déplacée.
 Si on rajoute une autre référence de branche sur la branche “rebasée”, alors les commits restent référencés après le rebase et restent visibles.
+
+Il est fortement recommander de ne pas utiliser cette commande sur une branche qui a déjà été persistée sur le dépôt distant (voir la mise en situation 4).
 ====
 
 === Identifier un commit et se déplacer dans l'arbre de révisions :  la distinction entre checkout, reset et revert
@@ -187,5 +189,19 @@ De cette manière, si je tente la commande `git rebase master` à partir de la b
 ==== Solution
 
 * la solution est d’utiliser rebase --onto
+
+=== Situation 4 : J'ai modifié la référence d'une branche distante et mes équipiers perdent les références à cette branche
+==== Description
+Vous vous souvenez qu'on vous a dit de ne jamais utiliser la commande rebase sur une branche qui a déjà été persistée sur le dépôt distant? Voici une situation qui peut avoir lieu si vous ne respectez pas cette bonne pratique:
+
+Soit une branche bX déjà poussée sur le dépôt origin et une branche master qui a évolué depuis la création et la persistance de cette branche.
+
+je lance les commandes suivantes : `git checkout bX`, `git rebase master`, `git push origin bX --force`.
+
+Ce faisant, je force mon dépôt distant à déréférencer ma précédente branche bX pour en créer une nouvelle qui est issue du dernier commit de la branche master.
+
+Si j'étais seul sur mon projet, cette opération n'aurait eu aucun impact visible parce que ma nouvelle branche distance est correctement référencée et associée à la nouvelle branche sur le dépôt distant...
+
+Malheureusement, je ne suis pas seul et mes équipiers commencent à venir me voir un par un pour me demander pourquoi les commits qu'ils ont rajoutés sur leur branche en local n'existent plus depuis qu'ils ont lancé la commande `git pull`....
 
 
