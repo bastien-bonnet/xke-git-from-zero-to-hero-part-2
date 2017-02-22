@@ -22,14 +22,20 @@ Avant le XKE, envoyer les pré-requis ET le descriptif de l'atelier par email.
 
 
 == Introduction
-Programme du slot :
+=== Programme du slot 
 
 * merge et rebase
 * manipulation et “deplacement” de commit
 * cas pratiques rencontrés en projets
 
-TODO faire le parallele avec java pour la notion de référencement d’objets et de garbage collector.
-Un commit est immutable => on ne supprime jamais un commit mais on peut perdre sa visibilité par déréférencement (git reset ou git rebase).
+=== Préambule
+Avant de commencer, nous allons définir quelques points clés à garder en tête pendant toute la durée de l'exercice:
+
+* Un commit git est immutable. Quoi qu'il arrive, même si vous avez l'impression qu'un commit a disparu, a été modifié ou a été déplacé, gardez à l'esprit qu'**un commit git ne peut jamais être modifié**, que ce soit au niveau de son contenu, son message descriptif ou ses parents.
+* **Un commit git est unique**. Cette unicité est garantie par son identifiant généré à sa création sous la forme d'une clée SHA1.
+* A la manière d'une instance d'objet java, un commit git reste accessible (visible dans l'historique) tant qu'il est référencé par un tag, une branche ou le HEAD ou tant qu'il est le parent d'un autre commit visible.
+* Toujours à la manière de java, il est possible de détruire définitivement un commit en appelant un garbage collector avec la commande `git gc` à condition que ce commit ne soit plus visible. Notez que qu'il n'est pratiquement jamais util ni recommandé d'utiliser cette commande.
+
 
 
 TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
@@ -85,12 +91,12 @@ Il existe plusieurs façons d’identifier un commit dans une commande git :
 ** 3 commits antérieurs à HEAD sur le 2ème parent: `HEAD~3^2`
 ** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (oui! ça aussi, c'est possible!)
 
-Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes de identification de commit.
+Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes d'identification de commit.
 
 ==== Checkout
 `git checkout` permet de restaurer l'état du système de fichiers à un commit donné en déplaçant uniquement le HEAD de git. 
 
-==== reset
+==== Reset
 reset deplace une référence de branche sans modifier le contenu du système de fichiers
 
 utilisation de base de reset :
@@ -103,7 +109,7 @@ utilisation de base de reset :
 Note : si vous voulez déplacer une référence de branche vers un commit rx et rétablir le file system à l’état du commit rx, utiliser `git reset --hard`
 * `git l` : vous voyez que le commit r1 a disparu et que HEAD et master correspondent au commit r0. En réalité, le commit r1 existe toujours mais n'est plus référencé par la branche master.
 
-==== reflog
+==== Reflog
 `git reflog` affiche la liste des opérations qui ont eu lieu dans votre arbre de révision local.
 Ainsi, nous pouvons retrouver la clé SHA1 d’un commit perdu avec la commande git reflog et nous pouvons rétablir un commit perdu si on connait sa clé SHA1  (git checkout mySHA1  puis git branch).
 
