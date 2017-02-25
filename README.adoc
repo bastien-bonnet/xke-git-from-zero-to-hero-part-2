@@ -1,4 +1,4 @@
-= Giv from zero to hero: 2
+= Git from zero to hero: 2. Fusionner, déplacer des branches et des commits
 :Author: Bastien Bonnet, Alexandre Dergham
 :toc:
 :numbered: 1
@@ -73,14 +73,14 @@ TODO
 
 [NOTE]
 ====
-la commande rebase applique les modifications de chaque commit de la branche courante sur la cible. Ces modifications sont traitées commit par commit. Ce qui veut dire qu'on résout les merges et leurs conflits commit par commit au lieu de comparer l'état final d'une branche avec celle d'une autre (comme le ferait la commande merge).
+la commande +rebase+ applique les modifications de chaque commit de la branche courante sur la cible. Ces modifications sont traitées commit par commit. Ce qui veut dire qu'on résout les conflits commit par commit au lieu de comparer l'état final d'une branche avec celle d'une autre (comme le ferait la commande +merge+).
 
-La commande rebase ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (référencé par une branche, tag ou sa clé SHA1).
+La commande +rebase+ ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (référencé par une branche, tag ou sa clé SHA1).
 
 Une fois les commits créées, la référence de la branche est déplacée sur ces commits, ce qui donne l’illusion que la branche a été déplacée.
-Si on rajoute une autre référence de branche sur la branche “rebasée”, alors les commits restent référencés après le rebase et restent visibles.
+Si on rajoute une autre référence de branche sur la branche « rebasée », alors les commits restent référencés après le rebase et restent visibles.
 
-Il est fortement recommander de ne pas utiliser cette commande sur une branche qui a déjà été persistée sur le dépôt distant (voir la mise en situation 4).
+Il est fortement déconseillé d'utiliser cette commande sur une branche qui a déjà été persistée sur le dépôt distant (voir la mise en situation 4).
 ====
 
 === Identifier un commit et se déplacer dans l'arbre de révisions :  la distinction entre checkout, reset et revert
