@@ -5,29 +5,29 @@
 
 TODO
 Avant le XKE, envoyer les pré-requis ET le descriptif de l'atelier par email.
+Ajouter fichiers source dans dépôt
 
 == Pré-requis :
 
-* Récupérer le projet en local
+. Récupérer le projet en local
 
 	git clone https://github.com/bastien-bonnet/xke-git-from-zero-to-hero-part-2.git
 
-* Se placer dans le répertoire du projet cloné :
+. Se placer dans le répertoire du projet cloné
 
 	cd xke-git-from-zero-to-hero-part-2
 
-* Pour visualiser l'historique des commits sous forme de graphe compact, nous rajoutons un alias :
+. Pour visualiser l'historique des commits sous forme de graphe compact, nous rajoutons un alias :
 
 	git config alias.l 'log --graph --oneline --color --decorate --all'
-	
++
 N'hésitez pas à utiliser cet alias avant et après chaque commande de l'atelier pour bien visualiser les changements apportés par chaque commande lancée.
-	
 
 
 == Introduction
 === Programme du slot 
 
-* merge et rebase
+* `merge` et `rebase`
 * manipulation et « déplacement » de commit
 * cas pratiques rencontrés en projets
 
@@ -38,8 +38,6 @@ Avant de commencer, nous allons définir quelques points clés à garder en têt
 * **Un commit git est unique**. Cette unicité est garantie par son identifiant généré à sa création sous la forme d'une clé SHA1.
 * À la manière d'une instance d'objet Java, un commit Git reste accessible (visible dans l'historique) tant qu'il est référencé par un tag, une branche ou le HEAD ou tant qu'il est le parent d'un autre commit visible.
 * Toujours à la manière de Java, il est possible de détruire définitivement un commit en appelant un garbage collector avec la commande `git gc` à condition que ce commit ne soit plus visible. Notez que qu'il n'est pratiquement jamais utile ni recommandé d'utiliser cette commande.
-
-
 
 TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
 
@@ -54,13 +52,15 @@ TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du
 * merge de la branche sur master : `git merge ma-branche`
 * affichage de l'arbre des commits : `git l`
 
+On peut observer que le résultat du `merge` est un commit supplémentaire, réunissant les deux branche. Avantage : l'historique montre que les deux développement ont été effectués en parallèle. Inconvénient : plus il y a de merge, plus l'historique est compliqué à lire et comprendre.
+
+=== Résolution de conflit (reprise du précédent)
+TODO
+
 [NOTE]
 ====
 La commande merge résout les conflits en prenant pour référence le dernier commit (autrement dit, le dernier état du code source) de chaque branche.
 ====
-
-=== Résolution de conflit (reprise du précédent)
-TODO
 
 === Rebase
 * positionner HEAD sur master : `git checkout master`
@@ -70,6 +70,8 @@ TODO
 * modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
 * rebase de la branche sur master : `git checkout mon-autre-branche` puis `git rebase master`
 * affichage de l'arbre des commits : `git l`
+
+On remarque les commits de `mon-autre-branche` ont été « déplacés » sur ceux de master. Avantage : l'historique est linéaire est simple à comprendre. Inconvénient : on perd l'information du fait que les deux branches ont été développées en parallèle.
 
 [NOTE]
 ====
@@ -92,11 +94,13 @@ Il existe plusieurs façons d’identifier un commit dans une commande git :
 ** 1 commit antérieur au HEAD sur son 1er parent : `HEAD~` ou `HEAD^`
 ** 2 commits antérieur à HEAD sur son 1er parent: `HEAD~~` ou `HEAD~2`
 ** 42 commits antérieurs à HEAD sur son 1er parent: `HEAD~42`
-** 1 commit antérieur à HEAD sur le 2ème parent (et oui! En cas de merge, un commit peut avoir 2 parents ^^): `HEAD^2`
+** 1 commit antérieur à HEAD sur le 2ème parent (Et oui ! En cas de merge, un commit peut avoir 2 parents ^^) : `HEAD^2`
 ** 3 commits antérieurs à HEAD sur le 2ème parent: `HEAD~3^2`
-** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (oui! ça aussi, c'est possible!)
+** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (Oui ! Ça aussi, c'est possible !)
 
-Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes d'identification de commit.
+Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes d'identification de commit. Terminez par un `git checkout master` pour vous remettre au bon endroit pour la suite de l'atelier.
+
+TODO note HEAD
 
 ==== Checkout
 `git checkout` permet de restaurer l'état du système de fichiers à un commit donné en déplaçant uniquement le HEAD de git. 
