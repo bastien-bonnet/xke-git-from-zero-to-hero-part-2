@@ -86,11 +86,12 @@ Il est fortement déconseillé d'utiliser cette commande sur une branche qui a d
 ====
 
 === Identifier un commit et se déplacer dans l'arbre de révisions :  la distinction entre checkout, reset et revert
-Il existe plusieurs façons d’identifier un commit dans une commande git :
+Dans cette section, nous allons voir comment utiliser les commandes `checkout`, `reset` et `revert`, qui permettent de se déplacer dans le graphe des révisions. Ces commandes vont prendre en argument un élément pemettant d'identifier le commit que vous ciblez. Il existe plusieurs façons d’identifier un commit dans une commande Git :
+
 
 * nom de la branche associée, par exemple `git checkout ma-branche` que vous connaissez déjà.
 * identifiant du commit. Il s'agit de la clé SHA1 du commit (visible avec certaines commandes comme  `git reflog`, `git log` ou notre alias `git l`)
-* Relativement à un autre commit en utilisant les operateurs ~ et ^: 
+* relativement à un autre commit en utilisant les operateurs ~ et ^: 
 ** 1 commit antérieur au HEAD sur son 1er parent : `HEAD~` ou `HEAD^`
 ** 2 commits antérieur à HEAD sur son 1er parent: `HEAD~~` ou `HEAD~2`
 ** 42 commits antérieurs à HEAD sur son 1er parent: `HEAD~42`
@@ -98,15 +99,15 @@ Il existe plusieurs façons d’identifier un commit dans une commande git :
 ** 3 commits antérieurs à HEAD sur le 2ème parent: `HEAD~3^2`
 ** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (Oui ! Ça aussi, c'est possible !)
 
-Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes d'identification de commit. Terminez par un `git checkout master` pour vous remettre au bon endroit pour la suite de l'atelier.
-
-TODO note HEAD
+En terminologie Git, `HEAD` fait référence au commit sur lequel vous avez commencé votre travail. Il s'agit d'un pointeur, au sens programmation, sur un commit présent dans l'historique, qui représente votre « point de départ » pour votre développement.
 
 ==== Checkout
-`git checkout` permet de restaurer l'état du système de fichiers à un commit donné en déplaçant uniquement le HEAD de git. 
+`git checkout` permet de restaurer l'état du système de fichiers, aussi appelé copie de travail, à un commit donné en déplaçant uniquement le HEAD de git. 
+
+Vous pouvez prendre 5 minutes et jouer avec la commande `git checkout` en utilisant ces méthodes d'identification de commit. Terminez par un `git checkout master` pour vous remettre au bon endroit pour la suite de l'atelier.
 
 ==== Reset
-reset deplace une référence de branche sans modifier le contenu du système de fichiers
+`git reset` deplace une référence de branche sans modifier le contenu du système de fichiers.
 
 utilisation de base de reset :
 
@@ -124,7 +125,7 @@ Ainsi, nous pouvons retrouver la clé SHA1 d’un commit perdu avec la commande 
 
 Nous allons utiliser reflog et reset pour rendre à un commit disparu son référencement:
 
-* `git reflog` pour faire apparaitre le commit r1 que nous venons de déréférencer (juste avant de lancer la commande `git reset`, soit la clé de la 2eme ligne affichée par reflog.).
+* `git reflog` pour faire apparaitre le commit r1 que nous venons de déréférencer (juste avant de lancer la commande `git reset`, soit la clé de la deuxième ligne affichée par reflog.).
 * `git reset <SHA1_du_commit_r1>` : la référence de master est repositionnée sur le commit r1 (sans modifier le système de fichiers.) 
 
 ==== Revert
