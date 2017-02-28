@@ -17,7 +17,7 @@ Ajouter fichiers source dans dépôt
 
 	cd xke-git-from-zero-to-hero-part-2
 
-. Pour visualiser l'historique des commits sous forme de graphe compact, nous rajoutons un alias :
+. Pour visualiser l'historique des commits sous forme de graphe compact, nous rajoutons un alias `git l`:
 
 	git config alias.l 'log --graph --oneline --color --decorate --all'
 +
@@ -42,48 +42,6 @@ Avant de commencer, nous allons définir quelques points clés à garder en têt
 TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
 
 == Consignes
-
-=== Merge
-* positionner HEAD sur master : `git checkout master`
-* creer une branche `git branch ma-branche` puis `git checkout ma-branche` (par la suite, vous obtiendrez le même résultat avec la commande `git checkout -b ma-branche`)
-* modifier un fichier puis commiter : `git add .` puis `git commit -m "modif dans ma branche"`
-* retour sur la branche master : `git checkout master`
-* modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
-* merge de la branche sur master : `git merge ma-branche`
-* affichage de l'arbre des commits : `git l`
-
-On peut observer que le résultat du `merge` est un commit supplémentaire, réunissant les deux branche. Avantage : l'historique montre que les deux développement ont été effectués en parallèle. Inconvénient : plus il y a de merge, plus l'historique est compliqué à lire et comprendre.
-
-=== Résolution de conflit (reprise du précédent)
-TODO
-
-[NOTE]
-====
-La commande merge résout les conflits en prenant pour référence le dernier commit (autrement dit, le dernier état du code source) de chaque branche.
-====
-
-=== Rebase
-* positionner HEAD sur master : `git checkout master`
-* creer une branche puis se positionner dessus :  `git checkout -b mon-autre-branche`
-* modifier un fichier puis commiter : `git add .` puis `git commit -m "modif dans ma branche"`
-* retour sur la branche master : `git checkout master`
-* modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
-* rebase de la branche sur master : `git checkout mon-autre-branche` puis `git rebase master`
-* affichage de l'arbre des commits : `git l`
-
-On remarque les commits de `mon-autre-branche` ont été « déplacés » sur ceux de master. Avantage : l'historique est linéaire est simple à comprendre. Inconvénient : on perd l'information du fait que les deux branches ont été développées en parallèle.
-
-[NOTE]
-====
-la commande `rebase` applique les modifications de chaque commit de la branche courante sur la cible. Ces modifications sont traitées commit par commit. Ce qui veut dire qu'on résout les conflits commit par commit au lieu de comparer l'état final d'une branche avec celle d'une autre (comme le ferait la commande `merge`).
-
-La commande `rebase` ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (référencé par une branche, tag ou sa clé SHA1).
-
-Une fois les commits créées, la référence de la branche est déplacée sur ces commits, ce qui donne l’illusion que la branche a été déplacée.
-Si on rajoute une autre référence de branche sur la branche « rebasée », alors les commits restent référencés après le rebase et restent visibles.
-
-Il est fortement déconseillé d'utiliser cette commande sur une branche qui a déjà été persistée sur le dépôt distant (voir la mise en situation 4).
-====
 
 === Identifier un commit et se déplacer dans l'arbre de révisions :  la distinction entre checkout, reset et revert
 Dans cette section, nous allons voir comment utiliser les commandes `checkout`, `reset` et `revert`, qui permettent de se déplacer dans le graphe des révisions. Ces commandes vont prendre en argument un élément pemettant d'identifier le commit que vous ciblez. Il existe plusieurs façons d’identifier un commit dans une commande Git :
@@ -132,6 +90,61 @@ Nous allons utiliser reflog et reset pour rendre à un commit disparu son réfé
 Cette commande crée un nouveau commit, modifiant le système de fichier, qui inverse les modification d'un commit:
 
 * `git revert HEAD` : on crée un nouveau commit après r1 qui inverse les modifications de r0 vers r1.
+
+
+=== Merge
+==== Explication
+La commande `merge` crée un commit supplémentaire qui réunit le dernier état de deux branches. 
+
+* Avantage : l'historique montre que les deux développements ont été effectués en parallèle. 
+* Inconvénient : plus il y a de merge, plus l'historique est compliqué à lire et comprendre.
+
+==== Exercice
+* positionner HEAD sur master : `git checkout master`
+* creer une branche `git branch ma-branche` puis `git checkout ma-branche` (par la suite, vous obtiendrez le même résultat avec la commande `git checkout -b ma-branche`)
+* modifier un fichier puis commiter : `git add .` puis `git commit -m "modif dans ma branche"`
+* retour sur la branche master : `git checkout master`
+* modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
+* merge de la branche sur master : `git merge ma-branche`
+* affichage de l'arbre des commits : `git l`
+
+
+=== Résolution de conflit (reprise du précédent)
+TODO
+
+[NOTE]
+====
+La commande merge résout les conflits en prenant pour référence le dernier commit (autrement dit, le dernier état du code source) de chaque branche.
+====
+
+=== Rebase
+==== Explication
+La commande `rebase` permet de "déplacer" les commits d'une branche sur une nouvelle branche ou un nouveau commit. ceci permet d'appliquer les modifications d'une branche sur une autre branche.
+
+* Avantage : l'historique est linéaire est simple à comprendre.
+* Inconvénient : le fait que le développement de  deux branches aient été fait en parallèle n'apparaît plus sur l'arbre de révisions.
+
+
+==== Exercice
+* positionner HEAD sur master : `git checkout master`
+* creer une branche puis se positionner dessus :  `git checkout -b mon-autre-branche`
+* modifier un fichier puis commiter : `git add .` puis `git commit -m "modif dans ma branche"`
+* retour sur la branche master : `git checkout master`
+* modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
+* rebase de la branche sur master : `git checkout mon-autre-branche` puis `git rebase master`
+* affichage de l'arbre des commits : `git l`
+
+[NOTE]
+====
+la commande `rebase` applique les modifications de chaque commit de la branche courante sur la cible. Ces modifications sont traitées commit par commit. Ce qui veut dire qu'on résout les conflits commit par commit au lieu de comparer l'état final d'une branche avec celle d'une autre (comme le ferait la commande `merge`).
+
+La commande `rebase` ne déplace pas une branche, cette commande recrée de nouveaux commits en appliquant les modifications successives d’une branche sur un autre commit (référencé par une branche, tag ou sa clé SHA1).
+
+Une fois les commits créées, la référence de la branche est déplacée sur ces commits, ce qui donne l’illusion que la branche a été déplacée.
+Si on rajoute une autre référence de branche sur la branche « rebasée », alors les commits restent référencés après le rebase et restent visibles.
+
+Il est fortement déconseillé d'utiliser cette commande sur une branche qui a déjà été persistée sur le dépôt distant (voir la mise en situation 4).
+====
 
 === rebase --interactive ou rebase -i : Réécrire l'histoire d'une branche
 
