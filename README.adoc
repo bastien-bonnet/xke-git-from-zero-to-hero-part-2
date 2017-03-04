@@ -43,8 +43,6 @@ Avant de commencer, nous allons définir quelques points clés à garder en têt
 * À la manière d'une instance d'objet Java, un commit Git reste accessible (visible dans l'historique) tant qu'il est référencé par un tag, une branche ou le HEAD ou tant qu'il est le parent d'un autre commit visible.
 * Toujours à la manière de Java, il est possible de détruire définitivement un commit en appelant un garbage collector avec la commande `git gc` à condition que ce commit ne soit plus visible. Notez que qu'il n'est pratiquement jamais utile ni recommandé d'utiliser cette commande.
 
-TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
-
 == Consignes
 
 === Identifier un commit et se déplacer dans l'arbre de révisions :  la distinction entre checkout, reset et revert
@@ -144,6 +142,8 @@ Si on rajoute une autre référence de branche sur la branche « rebasée », 
 
 Il est fortement déconseillé d'utiliser cette commande sur une branche qui a déjà été persistée sur le dépôt distant (voir la mise en situation 4).
 ====
+
+TODO ajouter une image pour illustrer l’immutabilité dans la partie rebase du hand’s on.
 
 === rebase --interactive ou rebase -i : Réécrire l'histoire d'une branche
 
