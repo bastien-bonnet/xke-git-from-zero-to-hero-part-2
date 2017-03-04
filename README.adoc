@@ -3,11 +3,7 @@
 :toc:
 :numbered: 1
 
-TODO
-Avant le XKE, envoyer les pré-requis ET le descriptif de l'atelier par email.
-Ajouter fichiers source dans dépôt
-
-== Pré-requis :
+== Pré-requis
 
 . Récupérer le projet en local
 
