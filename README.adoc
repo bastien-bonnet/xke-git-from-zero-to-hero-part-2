@@ -51,11 +51,11 @@ Dans cette section, nous allons voir comment utiliser les commandes `checkout`, 
 
 * nom de la branche associée, par exemple `git checkout ma-branche` que vous connaissez déjà.
 * identifiant du commit. Il s'agit de la clé SHA1 du commit (visible avec certaines commandes comme  `git reflog`, `git log` ou notre alias `git l`)
-* relativement à un autre commit en utilisant les operateurs ~ et ^: 
-** 1 commit antérieur au HEAD sur son 1er parent : `HEAD~` ou `HEAD^`
+* relativement à un autre commit en utilisant les operateurs `~` et `^`:
+** 1 commit antérieur au HEAD sur son 1er parent (Et oui ! En cas de merge, un commit peut avoir 2 parents ^^) : `HEAD~` ou `HEAD^`
 ** 2 commits antérieur à HEAD sur son 1er parent: `HEAD~~` ou `HEAD~2`
 ** 42 commits antérieurs à HEAD sur son 1er parent: `HEAD~42`
-** 1 commit antérieur à HEAD sur le 2ème parent (Et oui ! En cas de merge, un commit peut avoir 2 parents ^^) : `HEAD^2`
+** 1 commit antérieur à HEAD sur le 2ème parent : `HEAD^2`
 ** 3 commits antérieurs à HEAD sur le 2ème parent: `HEAD~3^2`
 ** 1 commit antérieur au dernier commit de ma-branche : `ma-branche~` (Oui ! Ça aussi, c'est possible !)
 
