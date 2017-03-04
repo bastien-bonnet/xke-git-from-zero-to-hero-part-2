@@ -25,10 +25,10 @@ Pour utiliser l'alias que nous venons de définir (ne fonctionne que pour le pro
 
 
 == Introduction
-=== Programme du slot 
+=== Programme de l'atelier
 
+* manipulation et « déplacement » de commits
 * `merge` et `rebase`
-* manipulation et « déplacement » de commit
 * cas pratiques rencontrés en projets
 
 === Préambule
