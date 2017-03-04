@@ -27,6 +27,8 @@ Pour utiliser l'alias que nous venons de définir (ne fonctionne que pour le pro
 == Introduction
 === Programme de l'atelier
 
+Ceci est le deuxième atelier d'une série de trois sur l'utilisation de Git
+
 Les objectifs de cette séance sont d'apprendre à :
 
 * manipuler et « déplacement » de commits
@@ -111,14 +113,6 @@ La commande `merge` crée un commit supplémentaire qui réunit le dernier état
 * affichage de l'arbre des commits : `git l`
 
 On peut observer que le résultat du `merge` est un commit supplémentaire, réunissant les deux branches.
-
-=== Résolution de conflit (reprise du précédent)
-TODO
-
-[NOTE]
-====
-La commande merge résout les conflits en prenant pour référence le dernier commit (autrement dit, le dernier état du code source) de chaque branche.
-====
 
 === Rebase
 ==== Explication
