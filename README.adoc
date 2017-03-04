@@ -27,9 +27,11 @@ Pour utiliser l'alias que nous venons de définir (ne fonctionne que pour le pro
 == Introduction
 === Programme de l'atelier
 
-* manipulation et « déplacement » de commits
-* `merge` et `rebase`
-* cas pratiques rencontrés en projets
+Les objectifs de cette séance sont d'apprendre à :
+
+* manipuler et « déplacement » de commits
+* utiliser `merge` et `rebase`
+* résoudre des cas pratiques rencontrés en projets
 
 === Préambule
 Avant de commencer, nous allons définir quelques points clés à garder en tête pendant toute la durée de l'exercice :
