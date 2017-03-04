@@ -21,7 +21,9 @@ Ajouter fichiers source dans dépôt
 
 	git config alias.l 'log --graph --oneline --color --decorate --all'
 +
-N'hésitez pas à utiliser cet alias avant et après chaque commande de l'atelier pour bien visualiser les changements apportés par chaque commande lancée. Pour utiliser l'alias que nous venons de définir (ne fonctionne que pour le projet git dans lequel nous l'avons déclaré):
+N'hésitez pas à utiliser cet alias avant et après chaque commande de l'atelier pour bien visualiser les changements apportés par chaque commande lancée.
++
+Pour utiliser l'alias que nous venons de définir (ne fonctionne que pour le projet git dans lequel nous l'avons déclaré) :
 
 	git l
 
