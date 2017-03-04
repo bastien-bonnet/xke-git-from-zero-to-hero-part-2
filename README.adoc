@@ -108,6 +108,7 @@ La commande `merge` crée un commit supplémentaire qui réunit le dernier état
 * merge de la branche sur master : `git merge ma-branche`
 * affichage de l'arbre des commits : `git l`
 
+On peut observer que le résultat du `merge` est un commit supplémentaire, réunissant les deux branches.
 
 === Résolution de conflit (reprise du précédent)
 TODO
@@ -133,6 +134,8 @@ La commande `rebase` permet de "déplacer" les commits d'une branche sur une nou
 * modifier un autre fichier puis commiter : `git add .` puis `git commit -m "modif dans le master"`
 * rebase de la branche sur master : `git checkout mon-autre-branche` puis `git rebase master`
 * affichage de l'arbre des commits : `git l`
+
+On remarque les commits de `mon-autre-branche` ont été « déplacés » sur ceux de master.
 
 [NOTE]
 ====
