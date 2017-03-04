@@ -1,0 +1,12 @@
+Some code here
+
+more
+code
+
+function my_f {
+	echo "Hello"
+}
+
+funtion other_f {
+	echo "Bonjour"
+}
