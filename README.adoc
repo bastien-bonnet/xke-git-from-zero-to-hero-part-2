@@ -253,7 +253,7 @@ Pour nettoyer votre dépôt à la fin de cet exercice, effacez les branches cré
 
 ==== Description
 J'ai rajouté un commit sur la branche master au lieu d'en faire une nouvelle branche. En temps normal, développer une nouvelle feature implique de créer une nouvelle branche dédiée à cette feature.
-Je viens créer mon commit et mon HEAD pointe toujours sur la branche master.
+Je viens de créer mon commit et mon HEAD pointe toujours sur la branche master.
 
 ==== Mise en situation
 
