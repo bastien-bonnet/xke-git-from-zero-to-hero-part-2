@@ -25,6 +25,12 @@ Pour utiliser l'alias que nous venons de définir (ne fonctionne que pour le pro
 
 	git l
 
+. Définir votre éditeur de texte préféré pour Git (commande à taper dans le terminal dans lequel vous réalisez l'exercice) :
+
+	export EDITOR=nano
++
+Remplacez `nano` par l'éditeur de votre choix (vim, emacs, gedit, kate…)
+
 
 == Introduction
 === Programme de l'atelier
@@ -96,7 +102,7 @@ Ainsi, nous pouvons retrouver la clé SHA1 d’un commit perdu avec la commande 
 Nous allons utiliser reflog et reset pour rendre à un commit disparu son référencement :
 
 * `git reflog` pour faire apparaitre le commit r1 que nous venons de déréférencer (juste avant de lancer la commande `git reset`, soit la clé de la deuxième ligne affichée par reflog.).
-* `git reset <SHA1_du_commit_r1>` : la référence de master est repositionnée sur le commit r1 (sans modifier le système de fichiers.) 
+* `git reset --hard <SHA1_du_commit_r1>` : la référence de master est repositionnée sur le commit r1 (sans modifier le système de fichiers.) 
 * Vérifier le résultat avec `git l` :
 +
 image::images/gfzth_reflog_1.png[]
